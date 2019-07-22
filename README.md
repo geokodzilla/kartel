@@ -26,7 +26,7 @@ Aby rozpocząć porównywanie plików należy uruchomić program
 python gui.py
 ```
 
-![Okno główne](https://github.com/geokodzilla/kartel/img/main.jpg)
+![Okno główne](https://github.com/geokodzilla/kartel/blob/master/img/main.jpg)
 
 Powyżej główne okno programu w którym wskazujemy pliki do porównania oraz 
 ustalamy parametry dla danych w plikach xlsx
