@@ -34,7 +34,7 @@ class ExcelReader(object):
             raise AppBlad('Wskazany plik nie istniej %s' % self.filename)
         
     def read(self):
-        wb = load_workbook(self.filename)
+        wb = load_workbook(self.filename, data_only=True)
         sn = wb.sheetnames # nazwy arkuszy
         arkusz = wb[sn[self.numer_arkusza-1]] # wybieramy z listy arkusz wg kolejności
         last_col = len(arkusz[str(self.wiersz_naglowka)]) + 1 # ustalamy pozycję ostatniej kolumny
@@ -59,3 +59,6 @@ class ExcelReader(object):
                 header.append([str(arkusz.cell(row=x, column=k).value)  for k in range(self.kolumna_danych, last_col)])
         return data, header
          
+if __name__ == "__main__": #pragma: no cover
+    er = ExcelReader('./_example_data/raport_oldd.xlsx')
+    print(er.read())
