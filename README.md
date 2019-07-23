@@ -31,18 +31,57 @@ python gui.py
 Powyżej główne okno programu w którym wskazujemy pliki do porównania oraz 
 ustalamy parametry dla danych w plikach xlsx
 
+* numer arkusza - arkusz w którym znajdują się dane do porównania
+
+* kolumna danych - numer kolumny w której zaczynają się dane
+
+* wiersz nagłówka - numer wiersza od którego zaczyna się nagłówek danych
+
+* wiersz danych - numer wiersza od którego zaczynają się dane
+
+* id - numer kolumny która zawiera unikatowy identyfikator danych
+
+  * dwa numery rozdzielone przecinkiem to dwie kolumny z których program stworzy jeden identyfikator
+  * jeden numer to kolumna z jednoznacznym identyfikatorem
+  * puste pole - program automatycznie zanumeruje wiersze od 1 (opcja przydatna gdy wiersze nie są usuwane z plików )
+
+* ścieżki do plików służą do wskazania plików które chcemy ze sobą porównać
+
+  Poniżej wynik działania programu na przykładowych danych z katalogu "/_example_data"
+  raport wynikowy w postaci pliku raport.xlsx jest tworzony w głównym katalogu z programem.
+
+  ![Okno główne](img/raport_example.png)
+
+  Kolorem czerwonym zaznaczono dane usunięte, kolorem zielonym dane dodane, w przypadku modyfikacji w polu zaznaczony na szaro mamy zarówno wartość pierwotną jak i aktualną.
+
+  **UWAGA**
+
+  W przypadku gdy porównywanie danych trwa dość długo, należy najpierw w excelu zaznaczyć wszystkie puste wiersze (od miejsca w którym kończą się dane do końca arkusza) a następnie 
+  PPM -> Usuń wiersze - sposób ten dotyczy przypadków kiedy w tym arkuszu w dalszych wierszach był wcześniej jakieś dane ale zostały ręcznie usunięte. Program nie zignoruje tych pustych wierszy i będzie je analizował. W przypadku ok 1000 wierszy danych w obu plikach wynikowy raport powinniśmy otrzymać w czasie rzeczywistym.
+
 ## Uruchamianie testów
 
-Testowanie z wykorzystaniem pytest, poniżej polecenie generujące raport z pokryciem kodu testami
+Testowanie z wykorzystaniem pytest, poniżej przykładowe polecenie generujące raport z testów wraz pokryciem kodu testami
 
 ```o
-python3 -m pytest --cov-report term-missing --cov=kartel .
+python -m pytest --cov-report term-missing --cov=kartel .
 ```
 
 ## Wykorzystane biblioteki
 
 * [OpenPyXL](https://openpyxl.readthedocs.io/en/stable/) - A Python library to read/write Excel 2010 xlsx/xlsm file
 * [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/) - Python GUIs For Humans
+
+
+
+## Przyszłość
+
+Poniżej kilka pomysłów które być może zostaną ujęte w przyszłości:
+
+* zmiana biblioteki interfejsu graficznego na standardowy tkinter 
+* dodanie opcji konfiguracyjnych umożliwających utworzenie kilku zbiorów ustawień wejściowych zależnie od tego jakie dane chcemy ze sobą porównać
+
+
 
 ## Autor
 

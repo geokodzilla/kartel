@@ -14,12 +14,13 @@ from app_blad import *
 
 
 class ExcelWriter(object):
-
+    
+    # styl ramki
     thin_border = Border(left=Side(style='thin'),
                          right=Side(style='thin'),
                          top=Side(style='thin'),
                          bottom=Side(style='thin'))
-
+    # style poszczególnych rodzajów zmian
     styles_dict = {'U': {'font': Font(color='00000000', strike=True),
                          'fill': PatternFill(fill_type='solid', start_color='00FF0000', end_color='00FF0000')
                          },
@@ -40,6 +41,9 @@ class ExcelWriter(object):
 
 
     def write(self, file):
+        """
+        metoda zapisująca porównanie danych do pliku z raportem
+        """
         wb = Workbook()
         ws = wb.active
         ws.title = 'Raport'

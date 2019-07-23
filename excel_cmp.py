@@ -9,6 +9,15 @@ class ExcelCmp(object):
         
         
     def cmp(self):
+        """
+        metoda porównuje dane oryginalne z danymi aktualnymi wyszukjuąc wg klucza
+        ustalonego przy wczytywaniu wiersze dodane usunięte oraz zmodyfikowane
+        dane do zapisu w postaci listy krotek, pierwszy element krotki informuje
+        o rodzaju zmiany
+        U - usunięte
+        D - dodane
+        M - modyfikacja
+        """
         for k in self.old_data:
             if k not in self.new_data:
                 self.mod.append(('U', self.old_data[k]))
@@ -20,7 +29,7 @@ class ExcelCmp(object):
                 for nr, i in enumerate(v):
                     if i != self.old_data[k][nr]:
                         v[nr] = '%s -> %s' % (self.old_data[k][nr], i)
-                        v[nr] = v[nr].replace('None' , '~')
+                        v[nr] = v[nr].replace('None' , '')
                         c += 1
                 if c != 0:
                     self.mod.append(('M', v))
