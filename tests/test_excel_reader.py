@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from kartel.excel_reader import *
+from kartel.excel_reader import ExcelReader, AppBlad
 from collections import OrderedDict
 
 @pytest.fixture
@@ -14,11 +14,6 @@ def test_data_validation():
         ExcelReader('./_example_data/raport_old.xlsx', wiersz_naglowka='aa')
     assert e.value.code == 'Błędne parametry wczytania pliku'
 
-def test_file_validation():
-    with pytest.raises(AppBlad) as e:
-        ExcelReader('./_example_data/raport_older.xlsx')
-    assert e.value.code == 'Wskazany plik nie istniej ./_example_data/raport_older.xlsx'
-
 def test_read(xlsx):
     data, header = xlsx.read()
     assert data == OrderedDict([('5-100;1', ['1', '5-100;1', '1110', 'Dj']),
@@ -29,7 +24,7 @@ def test_read(xlsx):
     
 def test_kolumny_poza_zakresem():
     with pytest.raises(AppBlad) as e:
-            ExcelReader('./_example_data/raport_old.xlsx', kolumna_danych='9').read()
+            ExcelReader('./_example_data/raport_old.xlsx', kolumna_danych='30').read()
     assert e.value.code == 'Kolumny poza zakresem'
             
             
@@ -50,3 +45,7 @@ def test_id(test_input, expected):
     data, _ = ExcelReader('./_example_data/raport_old.xlsx', id=test_input).read()
     assert data == expected
     
+    
+def test_KOL(xlsx):
+    assert xlsx.KOL[8] == 'H'
+    assert xlsx.KOL[17] == 'Q'

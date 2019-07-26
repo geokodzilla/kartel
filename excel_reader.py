@@ -2,12 +2,13 @@
 
 from openpyxl import load_workbook, Workbook
 from collections import OrderedDict
-from app_blad import *
+from app_blad import AppBlad
 import os
+import string
 
 class ExcelReader(object):
 
-    KOL = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 6: 'F', 7: 'G', 8: 'H'}
+    KOL = {n: i for n, i in enumerate(string.ascii_uppercase, 1)}
     
     def __init__(self, filename, numer_arkusza='1', wiersz_naglowka='1', wiersz_danych='2', kolumna_danych='1', id=['3', '4']):
         self.filename = filename
@@ -17,7 +18,6 @@ class ExcelReader(object):
         self.kolumna_danych = kolumna_danych
         self.id = id
         self._data_validation()
-        self._file_validation()
         
     def _data_validation(self):
         """
@@ -31,14 +31,7 @@ class ExcelReader(object):
             self.id = [int(i) if i != '' else i for i in self.id]
         except ValueError:
             raise AppBlad('Błędne parametry wczytania pliku')
-            
-    def _file_validation(self):
-        """
-        metoda sprawdzająca czy wskazany plik faktycznie istniej
-        """
-        if not os.path.exists(self.filename):
-            raise AppBlad('Wskazany plik nie istniej %s' % self.filename)
-        
+                  
     def read(self):
         """
         metoda wczytująca dane z arkusza pliku xlsx, zwraca dane nagłówka
@@ -55,8 +48,7 @@ class ExcelReader(object):
         except KeyError:
             raise AppBlad('Kolumny poza zakresem')
         else:
-            i = 1
-            for row in arkusz.iter_rows(min_row=self.wiersz_danych, max_col=last_col, max_row=last_row): 
+            for i, row in enumerate(arkusz.iter_rows(min_row=self.wiersz_danych, max_col=last_col, max_row=last_row), 1): 
                 if len(self.id) == 2: # ID dla obrebu i budynku w osobnych kolumnach
                     id_obr = str(row[self.id[0]-1].value)
                     id_bud = str(row[self.id[1]-1].value)
@@ -66,7 +58,6 @@ class ExcelReader(object):
                 else: # gdy ID nie jest określone id zgodne z numerem wiersza
                     id = str(i)
                 data[id] = [str(cell.value) for cell in row]
-                i += 1
             header = []
             for row in arkusz.iter_rows(min_row=self.wiersz_naglowka, max_col=last_col, max_row=self.wiersz_danych-1):
                 header.append([str(cell.value) for cell in row])

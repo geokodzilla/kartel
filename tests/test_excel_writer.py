@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from kartel.excel_writer import *
-from kartel.excel_reader import *
+from kartel.excel_writer import ExcelWriter
+from kartel.excel_reader import ExcelReader
 from collections import OrderedDict
 
 @pytest.fixture

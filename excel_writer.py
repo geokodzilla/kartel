@@ -5,7 +5,7 @@ from collections import OrderedDict
 from openpyxl.styles import colors
 from openpyxl.styles import Font, Color, PatternFill
 from openpyxl.styles.borders import Border, Side
-from app_blad import *
+from app_blad import AppBlad
 
 ###############################################################################
 # STYLES

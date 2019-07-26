@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import PySimpleGUI as sg
-from excel_reader import *
-from excel_cmp import *
-from excel_writer import *
+from excel_reader import ExcelReader
+from excel_cmp import ExcelCmp
+from excel_writer import ExcelWriter
 
 
 def main_gui():
@@ -40,7 +40,8 @@ def main_gui():
                                         kolumna_danych=KOLUMNA_DANYCH, id=ID).read()
                 xlsx_cmp = ExcelCmp(old_data, new_data)
                 xlsx_cmp.cmp()
-                xlsx_writer = ExcelWriter(header, xlsx_cmp.mod)
+                zmiany = xlsx_cmo.mod
+                xlsx_writer = ExcelWriter(header, zmiany)
                 xlsx_writer.write('./raport.xlsx')
                 xlsx_cmp.clear_mod()
             except AppBlad as e:

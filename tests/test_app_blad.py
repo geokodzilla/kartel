@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from kartel.app_blad import *
+from kartel.app_blad import AppBlad
 
 @pytest.fixture
 def err():

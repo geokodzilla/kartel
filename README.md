@@ -11,12 +11,7 @@ konfiguracji będzie można porównywać również inne rodzaje danych.
 
 ### Biblioteki
 
-Zanim zaczniesz pracować z roboczą wersją programu kartel, zainstaluj w swoim środowisku następujące biblioteki:
-
-```
-pip install openpyxl
-pip install PySimpleGUI
-```
+Zanim zaczniesz pracować z roboczą wersją programu kartel, zainstaluj w swoim środowisku biblioteki ujęte w pliku requirements.txt. Program korzysta z biblioteki tkinter do prezentacji interfejsu graficznego.
 
 ### Pierwsze kroki
 

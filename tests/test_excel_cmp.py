@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from kartel.excel_cmp import *
+from kartel.excel_cmp import ExcelCmp
 from collections import OrderedDict
 
 @pytest.fixture
